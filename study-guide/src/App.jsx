@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import FlashcardDeck from './components/FlashcardDeck';
 
-function App() {
-  const [count, setCount] = useState(0)
+// 🔁 Mock AI function
+function generateStudyGuide(text) {
+  const summary = `Study Guide for: ${text.substring(0, 50)}...`;
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const cards = [
+    { front: 'Key Concept 1', back: 'Explanation of concept 1' },
+    { front: 'Key Concept 2', back: 'Explanation of concept 2' },
+    { front: 'Key Concept 3', back: 'Explanation of concept 3' },
+  ];
+
+  return { summary, flashcards: cards };
 }
 
-export default App
+function App() {
+  const [input, setInput] = useState('');
+  const [studyGuide, setStudyGuide] = useState('');
+  const [flashcards, setFlashcards] = useState([]);
+
+  const handleGenerate = () => {
+    const { summary, flashcards } = generateStudyGuide(input);
+    setStudyGuide(summary);
+    setFlashcards(flashcards);
+  };
+
+  return (
+    <div className="container">
+      <h1>AI Study Guide Generator</h1>
+
+      <textarea
+        placeholder="Paste your notes here..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+
+      <button onClick={handleGenerate}>Generate Study Guide</button>
+
+      <div className="flashcard-grid">
+        <FlashcardDeck cards={flashcards} />
+      </div>
+
+      {studyGuide && (
+        <div className="study-guide">
+          <h2>AI-Generated Study Guide:</h2>
+          <p>{studyGuide}</p>
+        </div>
+      )}
+  </div>
+  );
+}
+
+export default App;
