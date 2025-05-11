@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import FlashcardDeck from './components/FlashcardDeck.jsx';
 import TxtFileUploader from './components/TxtFileUploader.jsx';
 
-const API_URL = "https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [input, setInput] = useState("");
