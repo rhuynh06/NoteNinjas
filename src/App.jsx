@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import FlashcardDeck from './components/FlashcardDeck.jsx';
 import TxtFileUploader from './components/TxtFileUploader.jsx';
+import cpy from './assets/cpy.png';
+import light from './assets/light.png';
+import dark from './assets/dark.png';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -73,8 +76,8 @@ function App() {
         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           style={{background: 'transparent', border: 'none', cursor: 'pointer',
             padding: '0', display: 'flex', alignItems: 'center',}}>
-          {theme === "light" ? (<img src="src/assets/dark.png" width="50" height="auto"/>)
-          : (<img src="src/assets/light.png" width="50" height="auto"/>)}
+          {theme === "light" ? (<img src={dark} width="50" height="auto"/>)
+          : (<img src={light} width="50" height="auto"/>)}
         </button>
       </div>
 
@@ -100,7 +103,7 @@ function App() {
         {studyGuide && (
         <div className="study-guide" ref={studyGuideRef}>
           <button className="generate-btn copy-btn" style={{padding:'5px 5px', background:'white'}} onClick={handleCopy}>
-            <img src='src/assets/cpy.png' width='20px' height='auto'/>
+            <img src={cpy} width='20px' height='auto'/>
           </button>
           {renderStudyGuide(studyGuide)}
         </div>
