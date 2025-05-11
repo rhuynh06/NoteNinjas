@@ -5,7 +5,7 @@ import cpy from './assets/cpy.png';
 import light from './assets/light.png';
 import dark from './assets/dark.png';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke'
 
 function App() {
   const [input, setInput] = useState("");
@@ -89,7 +89,7 @@ function App() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <TxtFileUploader setInput={setInput} />
-        <button class='generate-btn' onClick={handleGenerate} disabled={loading}>
+        <button className="generate-btn" onClick={handleGenerate} disabled={loading}>
           {loading ? "Generating..." : "Generate Study Guide"}
         </button>
       </div>
