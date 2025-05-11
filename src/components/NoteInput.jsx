@@ -1,62 +1,63 @@
 import React, { useState } from 'react';
-import { API } from 'aws-amplify';
 
-const NoteInput = () => {
+const NoteInput = ({ onStudyGuideGenerated }) => {
   const [notes, setNotes] = useState('');
-  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const modelId = 'https://flx8imwbb7.execute-api.us-west-2.amazonaws.com/dev'; // Define your modelId here or fetch it dynamically
 
-  const handleInputChange = (event) => {
-    setNotes(event.target.value);
-  };
+  const apiUrl = 'https://q7jzcort01.execute-api.us-west-2.amazonaws.com'; // Replace with your actual URL
 
-  const callApi = async (notes) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
     try {
-      const response = await API.post('StudyGuideAPI', '/generate', {
-        body: {
-          notes,
-          modelId // Send the modelId along with notes to the Lambda function
-        }
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',         // Optional: generally ignored by browsers
+          'Access-Control-Allow-Methods': 'POST,OPTIONS', // Optional: ignored client-side
+          'Access-Control-Allow-Headers': '*',        // Optional: ignored client-side
+        },
+        body: JSON.stringify({ notes }), // Only send notes
       });
-      console.log('API Response:', response);
-      setResponse(response);  // Store the API response
-    } catch (error) {
-      console.error('Error calling API:', error);
-      setError(error);  // Store the error
-    }
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (notes.trim()) {
-      callApi(notes);  // Trigger the API call when the user submits the notes
+      if (!response.ok) {
+        throw new Error(`API responded with status ${response.status}`);
+      }
+
+      const data = await response.json();
+      onStudyGuideGenerated(data);
+    } catch (err) {
+      console.error('Error generating study guide:', err);
+      setError('Failed to generate study guide. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div style={{ padding: '1rem', maxWidth: '600px', margin: 'auto' }}>
       <h2>Enter Your Notes</h2>
       <form onSubmit={handleSubmit}>
         <textarea
           value={notes}
-          onChange={handleInputChange}
-          placeholder="Type your notes here..."
-          rows="5"
-          cols="40"
+          onChange={(e) => setNotes(e.target.value)}
+          rows={10}
+          cols={70}
+          placeholder="Paste your school notes here..."
+          style={{ width: '100%', padding: '0.5rem', fontSize: '1rem' }}
         />
-        <button type="submit">Generate Study Guide</button>
+        <br />
+        <button type="submit" disabled={loading} style={{ marginTop: '1rem' }}>
+          {loading ? 'Generating...' : 'Generate Study Guide'}
+        </button>
       </form>
-
-      {response && (
-        <div>
-          <h3>Study Guide:</h3>
-          {/* Render the response (terms and definitions, etc.) */}
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
+      {error && (
+        <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>
       )}
-
-      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
     </div>
   );
 };

@@ -20,7 +20,7 @@ export default function Flashcards({ data }) {
 
   return (
     <div className="text-center">
-      <h2 className="text-xl font-semibold mb-2">🃏 Flashcards</h2>
+      <h2 className="text-xl font-semibold mb-2">Flashcards</h2>
       <div
         className="border p-4 rounded shadow mb-2 cursor-pointer"
         onClick={() => setFlipped(!flipped)}

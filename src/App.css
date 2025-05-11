@@ -1,42 +1,137 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* styles.css */
+
+/* Base */
+body {
+  font-family: 'Comic Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Headings */
+h1 {
+  color: #ff6b6b;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h2 {
+  color: #4e89ff;
+  margin-bottom: 0.5rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* NoteInput */
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px dashed #6c63ff;
+  background-color: #fff0f6;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+  transition: border 0.3s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+textarea:focus {
+  border-color: #ffb347;
+  outline: none;
 }
 
-.card {
-  padding: 2em;
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
 }
 
-.read-the-docs {
-  color: #888;
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  transform: scale(1.05);
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* Flashcards */
+.flashcard-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.flashcard {
+  padding: 2rem;
+  border: 3px dotted #ffa502;
+  border-radius: 12px;
+  background-color: #fffde7;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3d3d3d;
+}
+
+.flashcard:hover {
+  transform: rotate(-1deg) scale(1.03);
+  background-color: #fffae6;
+}
+
+.flashcard-buttons button {
+  margin: 0 0.5rem;
+  background-color: #00cec9;
+  color: #fff;
+}
+
+.flashcard-buttons button:hover {
+  background-color: #00b894;
+}
+
+/* Study Guide */
+.study-guide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.study-guide ul {
+  list-style-type: 💡;
+  padding-left: 1.5rem;
+}
+
+.study-guide li {
+  margin-bottom: 0.5rem;
+  background: #e0f7fa;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+/* Layout container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
