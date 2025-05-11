@@ -4,6 +4,7 @@ import TxtFileUploader from './components/TxtFileUploader.jsx';
 import cpy from './assets/cpy.png';
 import light from './assets/light.png';
 import dark from './assets/dark.png';
+import logo from './assets/logo.png';
 
 const API_URL = 'https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke'
 
@@ -72,7 +73,7 @@ function App() {
   return (
     <div className="container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>AI Study Guide Generator</h1>
+        <h1><img src={logo} width='5%' height='auto'/> NoteNinjas <img src={logo} width='5%' height='auto'/></h1>
         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           style={{background: 'transparent', border: 'none', cursor: 'pointer',
             padding: '0', display: 'flex', alignItems: 'center',}}>
@@ -102,7 +103,7 @@ function App() {
 
         {studyGuide && (
         <div className="study-guide" ref={studyGuideRef}>
-          <button className="generate-btn copy-btn" style={{padding:'5px', background:'white'}} onClick={handleCopy}>
+          <button className="generate-btn copy-btn" style={{padding:'5px'}} onClick={handleCopy}>
             <img style={{border:'none'}} src={cpy} width='25px' height='auto'/>
           </button>
           {renderStudyGuide(studyGuide)}

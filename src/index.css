@@ -191,6 +191,15 @@ button:disabled {
   transform: rotateY(180deg);
 }
 
+.flashcard-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .upload-wrapper {
   display: flex;
   justify-content: flex-end;
@@ -271,7 +280,14 @@ button:disabled {
 .study-guide li {
   margin: 0.25rem 0;
   line-height: 1.5;
-  list-style-type: disc;
+  list-style: none;
+}
+
+.study-guide li::before {
+  content: "🥷";
+  font-size: 0.9em;
+  color: var(--highlight);
+  margin-right: 0.4em;
 }
 
 .study-guide p {
@@ -316,7 +332,8 @@ button:disabled {
 .copy-btn {
   position: relative;
   left: 95%;
-  background: var(--card-bg);
+  background: whitesmoke;
+  border-radius: 50%;
   padding: 6px;
   cursor: pointer;
   transition: transform 0.2s ease;
