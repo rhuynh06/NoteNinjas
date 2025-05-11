@@ -1,28 +1,34 @@
 import { useState } from 'react';
 import FlashcardDeck from './components/FlashcardDeck';
 
-// 🔁 Mock AI function
-function generateStudyGuide(text) {
-  const summary = `Study Guide for: ${text.substring(0, 50)}...`;
-
-  const cards = [
-    { front: 'Key Concept 1', back: 'Explanation of concept 1' },
-    { front: 'Key Concept 2', back: 'Explanation of concept 2' },
-    { front: 'Key Concept 3', back: 'Explanation of concept 3' },
-  ];
-
-  return { summary, flashcards: cards };
-}
+// 🔁 Replace this with your real API URL
+const API_URL = "https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke";
 
 function App() {
   const [input, setInput] = useState('');
   const [studyGuide, setStudyGuide] = useState('');
   const [flashcards, setFlashcards] = useState([]);
 
-  const handleGenerate = () => {
-    const { summary, flashcards } = generateStudyGuide(input);
-    setStudyGuide(summary);
-    setFlashcards(flashcards);
+  const handleGenerate = async () => {
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ inputText: input })
+      });
+
+      const data = await res.json();
+
+      // ✅ Adjust these keys to match your Lambda response
+      setStudyGuide(data.study_guide || "No study guide returned.");
+      setFlashcards(data.flashcards || []);
+    } catch (err) {
+      console.error("API error:", err);
+      setStudyGuide("Error generating study guide.");
+      setFlashcards([]);
+    }
   };
 
   return (
@@ -44,10 +50,10 @@ function App() {
       {studyGuide && (
         <div className="study-guide">
           <h2>AI-Generated Study Guide:</h2>
-          <p>{studyGuide}</p>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>{studyGuide}</pre>
         </div>
       )}
-  </div>
+    </div>
   );
 }
 
