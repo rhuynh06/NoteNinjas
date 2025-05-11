@@ -1,55 +1,62 @@
-/* styles.css */
-
-/* Base */
+/* Root and Typography */
 body {
-  font-family: 'Comic Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #fdfbfb, #ebedee);
-  margin: 0;
-  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  word-wrap: break-word;
 }
 
-/* Headings */
-h1 {
-  color: #ff6b6b;
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 1rem;
 }
 
-h2 {
-  color: #4e89ff;
-  margin-bottom: 0.5rem;
+/* Heading */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #4f46e5; /* Indigo */
+  text-shadow: 1px 1px 0 #ccc;
 }
 
-/* NoteInput */
+/* Textarea Input */
 textarea {
   width: 100%;
-  padding: 0.75rem;
+  min-height: 150px;
+  padding: 1rem;
   font-size: 1rem;
-  border-radius: 8px;
-  border: 2px dashed #6c63ff;
-  background-color: #fff0f6;
-  box-sizing: border-box;
+  border: 2px dashed #a78bfa; /* Purple border */
+  border-radius: 12px;
   resize: vertical;
-  font-family: inherit;
-  transition: border 0.3s ease;
+  background-color: #fef9ff;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.2s ease;
 }
 
 textarea:focus {
-  border-color: #ffb347;
   outline: none;
+  box-shadow: 0 0 10px #c084fc;
 }
 
+/* Button */
 button {
-  padding: 0.6rem 1.2rem;
+  background: linear-gradient(to right, #6366f1, #a855f7);
+  color: white;
+  padding: 0.75rem 2rem;
   font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(135deg, #f6d365, #fda085);
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
   font-weight: bold;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
 }
 
 button:disabled {
@@ -57,81 +64,88 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
-  transform: scale(1.05);
-}
-
-.error-message {
-  color: red;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-/* Flashcards */
-.flashcard-container {
-  text-align: center;
+/* Flashcard Grid */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
+/* Flashcard Flip Styles */
 .flashcard {
-  padding: 2rem;
-  border: 3px dotted #ffa502;
-  border-radius: 12px;
-  background-color: #fffde7;
-  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.1);
+  perspective: 1000px;
   cursor: pointer;
-  transition: transform 0.4s ease;
-  min-height: 120px;
+  position: relative;
+  height: 200px;
+}
+
+.flashcard .front,
+.flashcard .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease;
+  border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #3d3d3d;
+  padding: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.flashcard:hover {
-  transform: rotate(-1deg) scale(1.03);
-  background-color: #fffae6;
+.flashcard .front {
+  background: #facc15; /* Yellow */
+  color: #1e293b;
 }
 
-.flashcard-buttons button {
-  margin: 0 0.5rem;
-  background-color: #00cec9;
-  color: #fff;
+.flashcard .back {
+  background: #4ade80; /* Green */
+  color: #1e293b;
+  transform: rotateY(180deg);
 }
 
-.flashcard-buttons button:hover {
-  background-color: #00b894;
+.flashcard.flipped .front {
+  transform: rotateY(180deg);
 }
 
-/* Study Guide */
+.flashcard.flipped .back {
+  transform: rotateY(360deg);
+}
+
+.flashcard .front,
+.flashcard .back {
+  /* ...existing styles... */
+  word-wrap: break-word;          /* Wrap long words */
+  white-space: normal;            /* Allow multi-line wrapping */
+  text-align: center;             /* Optional: center text */
+  overflow-wrap: anywhere;        /* Force wrapping on very long strings */
+}
+
+
+/* Study Guide Section */
 .study-guide {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.study-guide ul {
-  list-style-type: 💡;
-  padding-left: 1.5rem;
-}
-
-.study-guide li {
-  margin-bottom: 0.5rem;
-  background: #e0f7fa;
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-
-/* Layout container */
-.container {
-  max-width: 900px;
-  margin: auto;
+  margin-top: 3rem;
+  background: #e0f2fe;
+  border: 2px solid #38bdf8;
+  border-radius: 1rem;
   padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: left;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+}
+
+.study-guide h2 {
+  color: #0ea5e9;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Error Message */
+.text-red-500 {
+  color: #dc2626;
+  font-weight: bold;
 }
