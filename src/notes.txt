@@ -1,0 +1,357 @@
+Python → C++
+storage: stack, heap, static area
+no colon at end of if/for/def/etc
+semicolon at end of statement
+curly brackets for multiple statements
+may use low level for loops
+duck typing replaced with explicit class hierarchy
+C++
+programs written as text in a file
+each file is a sequence of declarations and definitions
+a program has 1 start function (named “main”)
+I/O operators
+Inserter: <<
+send things to left of arrow
+bounded to terminal but can be redirected
+works with cout
+Extractor: >>
+stores input into variable to the right of arrow
+works with cin
+C++ Challenges
+Less dynamic (flexible), more static (fixed)
+Types MUST BE declared
+has static typing, not dynamic typing
+What happens when I pass parameters to a function?
+2 parameter passing modes: value vs reference
+value: pass by copy value
+2 concepts of assignment: shallow vs deep
+Does a variable have storage or not? Where is the storage? Who owns the storage? Who cleans up?
+3 areas of memory: stack, heap, static (global)
+Syntax is more involved
+Free-format, but semicolons are required at end of many statements
+Week 1: Basics
+Arrays don’t allow negative indexing (use vectors instead)
+L[-1] returns memory before array (???)
+Know pret and post operators (++i vs i++)
+++i: returns new value
+int x { 5 }; int y { ++x }; // x is incremented to 6, x is evaluated to the value 6, and 6 is assigned to y
+std::cout << x << ' ' << y << '\n';
+6 6
+i++: copies i, increments, returns copy
+int x { 5 }; int y { x++ }; // x is incremented to 6, copy of original x is evaluated to the value 5, and 5 is assigned to y std::cout << x << ' ' << y << '\n';
+6 5
+Expression (returns value) vs Statement (does something and requires ‘;’)
+Variable Life Cycle
+born, lives, dies
+birth: allocation, construction
+death: destruction, deallocation (not deconstruction)
+Three areas of memory (for allocation/deallocation)
+Static Storage/Data Segment: global or static variables
+Stack: parameters and local function variables
+Free Store/Heap: new/delete managed variables
+
+Segmentation Fault (segfault): fatal error
+Primitive types default to undefined, other types like string default to empty string
+((cout << 10) << endl;
+10 is sent to cout, endl (new line & flushes buffer) is sent to cout afterwards
+<< is a binary operator
+it is a left associative
+0, ‘0’, ‘\0’, nullptr are False, everything else is True
+semicolon does nothing, equivalent to ‘pass’ in python
+formal parameter = parameter (placeholder), actual parameter = argument (actual)
+function must be declared before (above) being called
+undeclared error: not declared before being called
+undefined error: declared but not defined
+header files/module in .hpp/.h files → they are then #include in .cpp files
+Compilation (PCLL: please come let’s launch)
+preprocessor
+handles #include, #define, #ifdef
+compiler
+makes one pass over src file
+function (variable, class, etc)
+must be “declared” before it is “called”
+else error “undeclared function”
+translates functions to relocate binary machine language module
+linker
+called functions be “defined” before “program linking”
+else error “undefined function”
+loader
+binary executable program file is loaded in RAM and main() is called
+C String: const char * OR std::string
+for (auto c : s) → for every c in s
+Symbolic Constants: named constant (constexpr double PI = 3.14, will use PI not 3.14)
+constexpr instead of const because
+const protects variable from being modified
+constexpr makes variable known
+constexpr needs to be initalized when declared
+
+Week 2: Arrays
+default array value if not set is 0
+array is passed by reference (no need for &)
+when array passed into function it becomes a pointer → won’t be able to use for (auto s : P), can only do so if P was declared locally
+char is an integer ASCII code stored in 1 byte
+‘A’: 65, ‘Z’: 90, null: 0
+int index = upper_case_letter - ‘A’; // ‘A’ is now 0, etc.
+char is convertible to/from int
+int i = c;
+char c = static_cast<char>(i); // returns char value of i
+must initalize elements of array if we want them to be zero
+int counts[26] = {0}
+c-style strings: an array of char (char var[] {...})
+char s[12] = “Hello World”;
+physical size (includes ‘\0’): 12
+logical length (stops before ‘\0’): 11
+char s[] = “Hello World”;
+physical size: 12
+logical length: 11
+char s3[12];
+physical size: 12
+logical length: unknown
+char *s4 = “Hello World”;
+physical size: size of pointer
+logical length: 11 (size of string it’s pointing to)
+pointer to string literal (cannot modify, it’s a const)
+char * s5;
+segfault / unknown
+Week 3: Classes
+Member Function (has invibisble parameter ‘this’, similar to self):
+Normal: type functionName(parameters) {}
+Complex add( Complex c ) {...}
+may access private and public class members
+Constructor: className(parameters) : init list {}
+Complex(float newRe = 0.0, float newlm = 0.0) : re(newRe), im(newlm) {}
+control over building/initializing object at birth
+Destructor: ~className() {}
+~Complex() {}
+control over cleaning up and recycling object at death
+copy constructor: control over how obj are copied
+copy assign operator [=()]: control over how obj are assigned
+only methods can access private parts (of class obj)
+printing: must be able to see taht an obj is constructed correctly
+when creating class, should write constructors first then print method
+Defining inserter: operator <<
+operator << can not be a member function (not a method, NO THIS)
+ostream &operator << (ostream &out, const Complex &c)
+{ c.print(out); return out; }
+int main()
+{ Complex mySink(3.4, 2.2); cout << “Sink at location: ” << mySink << endl; }
+print() must declare “this” to be const also
+Reference Parameters
+purposes: modification and/or efficiency
+&: pass by reference, w/o is pass by value (copy & expensive)
+const&: efficiency + no modification
+Sets
+#include <set>
+set<type> name
+set<char> S;
+for ( char c = ‘A’; c <= ‘Z’; ++c ) s.insert(c);
+no duplicates (like python) unless using multiset
+var.find(x): returns iterator/pointer to memory of x if found else end
+Maps
+#include <map>
+map<2 params (key, value)> name
+map<string, int> A;
+A[“Bill”] = 33;
+A[“AI”] = 27;
+for ( auto E: A ) cout << E.first << “is” << E.second << “ ”;
+E is a pair<string, int>, would print “A is 33 B is 27 ” (alphabetical order, not random)
+Processing words in a file
+
+if input.txt doesn’t exist, in will close right away (NOTHING HAPPENS)
+Public or Private
+public: class interface
+private: class implementation
+simple rule
+make data members private
+make most member functions + constructors + destructors public
+often helper member functions will be private
+Declaring a class
+classes are declared in .hpp files
+
+Defining Member Functions
+member functions are defined in .cpp files
+scope qualifier “::”, namespace doesn’t matter (requires class::member func)
+
+Structs are default public, Class are default private
+Quiz
+pass by reference
+purposes: modification and/or efficiency
+&: efficiency
+const&: efficiency + no modification
+
+
+Week ¾: Strings
+logical size should be at least 1 less than physical size (for null terminator)
+Implicit vs Explicit casting
+Implicit: conversion w/o programmer intervention
+ex: int to double
+int intValue = 10; double doubleValue = intValue;
+Explicit: conversion w/ programmer intervention
+ex: double to int
+double doubleValue = 10.5; int intValue = (int)doubleValue;
+explicit prevents implicit conversion (requires manual)
+Constructor (only right operand exists) vs Assignment (both operands, left and right already exist)
+if “static” member function, it won’t have a this → will just be function
+c-string: char *s vs string literal: const str *s
+c-string: mutable
+string literal: read-only
+Copy constructors: called when an already initialized object is assigned a new value from another existing object
+ex: String(const String &s);
+Copy assignment: called when a new object is created from an existing object, as a copy of the existing object
+ex: String &operator = (const String &s)
+static helpers are general purpose (hw4)
+they know nothing about MAXLEN (shouldn’t reference MAXLEN)
+they don’t error checking
+contains lower level loops
+can call other static helpers if need
+string interface methods
+have a this obj
+do error checking
+call static helpers to do work
+can reference MAXLEN
+c-style string
+use strlen for getting length of str (logical length, w/o null)
+use strcpy for copying string of str
+use strcomp for comparing str (can’t compare strings using operators)
+can use operators for std::string
+Week ⅘: Dynamic Array
+Can change pointers
+Pointer contains address of some obj
+If pointer is null, using * will return segfault
+Has to point to address not literal/temp (rvalue)
+int *i = 10; // not allowed
+Reference can’t change (bound at birth), can change after death
+Can have multiple references to same obj
+References also contain address of some obj (only set at construction time)
+Ex:
+  int i = 10;
+  int * p = & i;
+  int & j = i;
+  i = 50; // changes i directly
+  *p = 60; // changes i indirectly
+  j = 70; 
+  int k = 20;
+  p = & k; // p now points to k
+  *p = 60; // changes k indirectly
+  j = k; // i now gets value of k
+  p = 0; // p is now a nullptr
+  *p = 100; // segfault
+
+Array base is a constant pointer to the first element
+int a[4]; int *p = a; ⇔ int *p = &a[0] ← however this isn’t valid (just understand concept)
+p[1] = 90; ⇔ *(p+1) = 90;
+p[4] = 70; ⇔ &p[4] = 70;
+Quiz: writing string methods using maxlen, two static helper methods, 2 public member functions, then main methods
+char s1[] = "Hello";
+char *s2 = "Hello"; // pointer to string literal (read-only)
+char *s3 = s1; // pointer to c-string
+s3[0] = 'M'; // changes s1 to "Mello"
+s2[0] = 'M'; // segfault
+Limitations of array (fixed-size)
+Size must be known at compile-time
+Once allocated, cannot change size (grow/shrink)
+Dynamic allocation of an array gives flexibility
+Dynamic Allocation of Arrays
+Size can be determined at run-time
+Once allocated, cannot change size (grow/shrink)
+new[]: allocates array from “free store” (aka Heap)
+delete[]: deallocates (returns to free store)
+int *a = new int[1];
+…
+delete [] a; // won’t delete by itself until end of program
+Warnings
+uninitialized pointer
+causes serious (and un-repeatable) run-time errors
+int *p;
+*p = 0; // seg fault (dereferencing uninitalized ptr)
+dangling reference
+pointer to dead obj/garbage, NOT nullptr
+memory leak
+storage lost (forever) due to missing ‘delete’
+redundant delete
+delete garbage more than once
+restrict dynamic allocation to class implementations to reduce errors
+Rule of 3: if class contains any pointers must write all 3
+copy constructor
+move constructor
+destructor
+Default copy construtor: memberwise copy
+String(String &s) = default;
+Default copy assignment: memberwise assignment
+String &operator(String &s) = default;
+Not the same as String(String &s) {} ← this does NOTHING, won’t construct (segfault); same w/ assignment
+L-value: value and address, R-value: value
+Vector v{10};
+v[0] = 1; // L-value: v[0]
+for ( int i = 1; i < v.length(); ++i ) // i is just var, not lvalue or rvalue
+v[i] = v[i-1] * 2; // L-value: v[i], R-value: v[i+1]
+cout << v[9] << endl; // R-value: v[9]
+Construction (this never constructed) vs Assignment (this already constructed)
+Move methods not required while Copy methods are
+using copy and swap idiom: String temp(s); std::swap(buf, temp.buf); (return *this; if it is assignment) → handles self assignemnt
+Quiz:
+Assignment operator =() always
+return *this (for chaining)
+Move methods (move constructor/assignemnt) always
+use ‘&&’ and no const parameters
+uses swap
+Copy constructor (&): requires deep copy, not shallow (shallow just points to same pointer)
+String(const String &s): buf(strdup(s.buf)) {}
+Move constructor (&&)
+String(String &&s): buf(nullptr) { swap(s); }
+Copy assignment (&)
+String &operator=(const String &s) {
+   String temp(s); swap(temp); return *this;
+}
+Move assignment (&&)
+String &operator=(String &&s) { swap(s); return *this; }
+Week ⅚ Linked List & Recursion:
+Arrays
+Useful because cache
+Each array is single object
+Indexed efficiently, A[i] - 2 or 3 instructions
+Size must be known when allocated
+Stack array: size must be static expression -e.g., [1000]
+Can use constexpr NO const
+Heap/freestore array: size may be dynamic or static expression -e.g., new char[strlen(s)+1]
+Can’t change size after allocation must create new and copy over (expensive)
+Linked List on the only hand can grow and shrink (can also insert any elements anywhere in middle)
+Linked List
+Linear structure where each element separate object
+List node objects are chained together with pointers
+New elements are best added where you have a pointer
+often head, tail, or anywhere in between
+A linked list is often traversed with a for loop and pointer (recursion works well)
+More flexible than an array
+Should only be used as implementation of classes (like dynamic array)
+Singly Linked List (SLL)
+Members may be called data and next
+Entry into list is called head
+null (or nullptr) is used to indicate end of list (for empty, head is nullptr)
+Traversing list
+for (Node *p = head; p != nullptr; p = p->next) cout << p->data << endl;
+delete p: replaces data in storage w/ nullptr 
+can’t access nullptr, ex: nullptr->next // error
+Important design decisions
+Identify helper methods/functions
+construction & assignment: copy(), free()
+reverse, +, +=, <<: reverse(), append(), print()
+<, >, <=, >=, !=, ==: compare(lhs, rhs), compare (lhs, rhs, n)
+indexOf(): find_list(), find_char(), index()
+[], size: nth(), length()
+Decide on memory management
+Who owns heap memory (node vs string)
+Resource Acquisition is Initalization (RAII)
+encapsulate each resource (e.g., heap memory) into a class
+constructor acquires the resource
+destructor releases the resource
+copy makes a deep copy
+move safely transfers resource ownership between objects
+simple, systematic way to prevent memory leaks
+Efficient considerations (special private constructor)
+efficiently creates obj, prevent copy
+private prevents use outside of String class
+Create namespace for helpers
+access outside
+Recursion
+Recursion occurs when a function calls itself
