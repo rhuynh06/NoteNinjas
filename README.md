@@ -1,6 +1,6 @@
 # 📘 NoteNinjas
 
-**NoteNinjas** is your AI-powered study sidekick that slices through your chaotic notes and transforms them into sharp, focused study guides. Using **Claude 3.7 Sonnet** from AWS Bedrock, it extracts key terms, definitions, and generates flashcards to help you master your material quickly.
+**[NoteNinjas](https://main.d2eixjtm6fw8s3.amplifyapp.com/)** is your AI-powered study sidekick that slices through your chaotic notes and transforms them into sharp, focused study guides. Using **Claude 3.7 Sonnet** from AWS Bedrock, it extracts key terms, definitions, and generates flashcards to help you master your material quickly.
 
 💡Built at UC Irvine's AWS CloudHacks 2025
 
