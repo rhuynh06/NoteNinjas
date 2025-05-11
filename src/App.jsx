@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FlashcardDeck from './components/FlashcardDeck.jsx';
 
 const API_URL = "https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke";
 
 function App() {
-  const [input, setInput] = useState("");              // ← Added input state
-  const [studyGuide, setStudyGuide] = useState("");    // ← Added studyGuide state
-  const [flashcards, setFlashcards] = useState([]);    // ← Added flashcards state
+  const [input, setInput] = useState("");
+  const [studyGuide, setStudyGuide] = useState("");
+  const [flashcards, setFlashcards] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -23,7 +28,6 @@ function App() {
       });
 
       const data = await res.json();
-
       setStudyGuide(data.study_guide || "No study guide returned.");
       setFlashcards(data.flashcards || []);
 
@@ -32,41 +36,43 @@ function App() {
       setError("Failed to generate study guide.");
       setStudyGuide("Error generating study guide.");
       setFlashcards([]);
-      
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">AI Study Guide Generator</h1>
+    <div className="container">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>AI Study Guide Generator</h1>
+        <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          style={{background: 'transparent', border: 'none', cursor: 'pointer',
+            padding: '0', display: 'flex', alignItems: 'center',}}>
+          {theme === "light" ? (<img src="src/assets/dark.png" width="50" height="auto"/>)
+          : (<img src="src/assets/light.png" width="50" height="auto"/>)}
+        </button>
+      </div>
 
       <textarea
-        className="w-full p-2 border rounded mb-4"
         placeholder="Paste your notes here..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
 
-      <button
-        onClick={handleGenerate}
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-6"
-        disabled={loading}
-      >
+      <button onClick={handleGenerate} disabled={loading}>
         {loading ? "Generating..." : "Generate Study Guide"}
       </button>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
-      <div className="flashcard-grid mb-6">
+      <div className="flashcard-grid">
         <FlashcardDeck cards={flashcards} />
       </div>
 
       {studyGuide && (
         <div className="study-guide">
-          <h2 className="text-xl font-semibold mb-2">AI-Generated Study Guide:</h2>
-          <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap">{studyGuide}</pre>
+          <h2>AI-Generated Study Guide:</h2>
+          {(studyGuide)}
         </div>
       )}
     </div>
