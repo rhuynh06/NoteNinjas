@@ -55,6 +55,7 @@ Make sure your .env file is correctly set up with API Gateway endpoint and any n
 - API Gateway – bridges frontend to backend
 - Amplify – hosts and deploys the frontend
 - IAM – secures resource access
+- CloudWatch – Monitors logs and errors from Lambda for debugging and observability
 
 ---
 
