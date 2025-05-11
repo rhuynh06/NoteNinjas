@@ -6,7 +6,7 @@ function TxtFileUploader({ setInput }) {
     if (file && file.type === 'text/plain') {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setInput(e.target.result); // Pass file content back to parent
+        setInput(e.target.result);
       };
       reader.readAsText(file);
     } else {
@@ -17,7 +17,7 @@ function TxtFileUploader({ setInput }) {
   return (
     <div className="upload-wrapper">
       <label className="upload-btn">
-        Upload .txt
+        Upload File
         <input type="file" accept=".txt" onChange={handleFileChange} />
       </label>
     </div>

@@ -284,9 +284,9 @@ button:disabled {
 }
 
 .study-guide li::before {
-  content: "🥷";
+  content: "✧";
   font-size: 0.9em;
-  color: var(--highlight);
+  color: var(--text);
   margin-right: 0.4em;
 }
 
