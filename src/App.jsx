@@ -4,7 +4,8 @@ import TxtFileUploader from './components/TxtFileUploader.jsx';
 import cpy from './assets/cpy.png';
 import light from './assets/light.png';
 import dark from './assets/dark.png';
-import logo from './assets/logo.png';
+import logo_light from './assets/logo_light.png';
+import logo_dark from './assets/logo_dark.png';
 
 const API_URL = 'https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke'
 
@@ -73,7 +74,7 @@ function App() {
   return (
     <div className="container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1><img src={logo} width='5%' height='auto'/> NoteNinjas <img src={logo} width='5%' height='auto'/></h1>
+        <img src={theme === "light" ? logo_light : logo_dark} style={{ width: '45%', height: 'auto' }}/>
         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           style={{background: 'transparent', border: 'none', cursor: 'pointer',
             padding: '0', display: 'flex', alignItems: 'center',}}>
