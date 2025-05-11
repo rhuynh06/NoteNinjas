@@ -32,8 +32,7 @@ An AI-powered tool that transforms your messy notes into structured study guides
 ## 🧪 Local Development Setup
 
 ### 1. Clone the repository
-git clone https://github.com/your-username/ai-study-guide-generator.git
-cd ai-study-guide-generator
+git clone https://github.com/rhuynh06/NoteNinjas.git
 
 ### 2. Install dependencies
 Install the required Python libraries:
