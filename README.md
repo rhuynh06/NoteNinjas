@@ -44,6 +44,8 @@ Install rpm (React Project Manager):
 ### 3. Start the development server
 - rpm run dev
 
+---
+
 ## 🧩 AWS Services Used
 - AWS Lambda – runs the Python backend
 - AWS Bedrock – generates study content using foundational models
@@ -51,11 +53,15 @@ Install rpm (React Project Manager):
 - Amplify – hosts and deploys the frontend
 - IAM – secures resource access
 
+---
+
 ## 📈 What's Next
 - 📄 Support for PDF and DOCX uploads
 - 📤 Export to Anki, Quizlet, or CSV
 - 🔐 User login and saved sessions
 - 🧠 Smarter AI with subject-specific tuning
+
+---
 
 ## 🤝 Team
 Built by Ryan Huynh, Kelvin Truong, and Ethan Vo
