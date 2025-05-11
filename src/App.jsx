@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import FlashcardDeck from './components/FlashcardDeck.jsx';
+import TxtFileUploader from './components/TxtFileUploader.jsx';
 
 const API_URL = "https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke";
 
@@ -48,8 +49,8 @@ function App() {
         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           style={{background: 'transparent', border: 'none', cursor: 'pointer',
             padding: '0', display: 'flex', alignItems: 'center',}}>
-          {theme === "light" ? (<img src="src/assets/dark.png" width="50" height="auto"/>)
-          : (<img src="src/assets/light.png" width="50" height="auto"/>)}
+          {theme === "light" ? (<img src="dark.png" width="50" height="auto"/>)
+          : (<img src="light.png" width="50" height="auto"/>)}
         </button>
       </div>
 
@@ -59,9 +60,12 @@ function App() {
         onChange={(e) => setInput(e.target.value)}
       />
 
-      <button onClick={handleGenerate} disabled={loading}>
-        {loading ? "Generating..." : "Generate Study Guide"}
-      </button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <TxtFileUploader setInput={setInput} />
+        <button class='generate-btn' onClick={handleGenerate} disabled={loading}>
+          {loading ? "Generating..." : "Generate Study Guide"}
+        </button>
+      </div>
 
       {error && <p className="text-red-500">{error}</p>}
 

@@ -1,30 +1,55 @@
 :root {
-  --bg: #f0f4f8;              /* Light icy blue background */
-  --text: #2b2d42;            /* Almost black for crisp text */
-  --primary: #ff6b6b;         /* Vibrant coral red */
-  --primary-hover: #ff5252;   /* Deeper red */
-  --secondary: #4ecdc4;       /* Tiffany blue */
-  --accent: #ffbe0b;          /* Golden yellow */
-  --border: #c9cad9;          /* Soft lavender gray */
-  --card-bg: #ffffff;         /* Pure white cards */
-  --card-shadow: rgba(100, 108, 255, 0.2); /* Soft blue glow */
-  --highlight: #d8f3dc;       /* Mint green highlight */
-  --link: #4361ee;            /* Electric blue */
+  --bg: #f0f4f8;
+  --text: #2b2d42;
+  --primary: linear-gradient(45deg, #ff6b6b, #ff9472);
+  --primary-hover: linear-gradient(45deg, #ff5252, #ff7f50);
+  --secondary: linear-gradient(45deg, #4ecdc4, #5ce1e6);
+  --accent: linear-gradient(45deg, #ffbe0b, #ff9f1c);
+  --border: #c9cad9;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(100, 108, 255, 0.2);
+  --highlight: #d8f3dc;
+  --link: #4361ee;
+  --disabled: #a0c4f2;
+
+  --button-color: var(--primary);
+  --button-hover: var(--primary-hover);
+--generate-color: linear-gradient(45deg, #ff6b6b, #ff8e72);
+  --generate-hover: linear-gradient(45deg, #ff5252, #ff6b57);
+
+  --upload-color: linear-gradient(45deg, #4facfe, #00f2fe);
+  --upload-hover: linear-gradient(45deg, #3b8efc, #00d4f2);
+
+  --arrow-color: linear-gradient(45deg, #b892ff, #80ed99);
+  --arrow-hover: linear-gradient(45deg, #a29bfe, #70e000);
 }
 
 [data-theme="dark"] {
-  --bg: #0f0f1b;              /* Deep space blue-black */
-  --text: #f8f9fa;            /* Bright white */
-  --primary: #ff7096;         /* Neon pink */
-  --primary-hover: #ff4d8d;   /* Hot pink */
-  --secondary: #70e000;       /* Electric lime */
-  --accent: #ff9e00;         /* Vibrant orange */
-  --border: #4a4e69;          /* Deep purple-gray */
-  --card-bg: #1a1a2e;         /* Rich navy cards */
-  --card-shadow: rgba(155, 0, 250, 0.3); /* Purple neon glow */
-  --highlight: #003566;       /* Deep ocean blue */
-  --link: #00b4d8;            /* Cyan */
+  --bg: #0f0f1b;
+  --text: #f8f9fa;
+  --primary: linear-gradient(45deg, #ff7096, #ff61c2);
+  --primary-hover: linear-gradient(45deg, #ff4d8d, #ff3cac);
+  --secondary: linear-gradient(45deg, #70e000, #38b000);
+  --accent: linear-gradient(45deg, #ff9e00, #f48c06);
+  --border: #4a4e69;
+  --card-bg: #1a1a2e;
+  --card-shadow: rgba(155, 0, 250, 0.3);
+  --highlight: #003566;
+  --link: #00b4d8;
+  --disabled: #4a5568;
+
+  --button-color: var(--primary);
+  --button-hover: var(--primary-hover);
+  --generate-color: linear-gradient(45deg, #ff4d6d, #ff3f3f);
+  --generate-hover: linear-gradient(45deg, #d00000, #dc2f02);
+
+  --upload-color: linear-gradient(45deg, #3a86ff, #00b4d8);
+  --upload-hover: linear-gradient(45deg, #1e90ff, #00a8cc);
+
+  --arrow-color: linear-gradient(45deg, #9d4edd, #70e000);
+  --arrow-hover: linear-gradient(45deg, #7b2cbf, #38b000);
 }
+
 
 body {
   margin: 0;
@@ -41,7 +66,7 @@ body {
 }
 
 textarea {
-  width: 100%;
+  width: 97%;
   min-height: 120px;
   padding: 10px;
   font-size: 1rem;
@@ -53,29 +78,38 @@ textarea {
   resize: vertical;
 }
 
-button {
-  background-color: var(--primary);
+button,
+.upload-btn,
+.generate-btn,
+.arrows {
+  background-image: var(--button-color);
+  background-size: 200% 200%;
+  background-position: left center;
   color: white;
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-bottom: 1.5rem;
+  font-weight: bold;
+  transition: background-position 0.3s ease, transform 0.3s ease;
+}
+
+button:hover:not(:disabled),
+.upload-btn:hover,
+.generate-btn:hover,
+.arrows:hover {
+  background-position: right center;
+  transform: translateY(-2px);
 }
 
 button:disabled {
-  background-color: #a0c4f2;
+  background-color: var(--disabled);
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-  background-color: var(--primary-hover);
-}
-
 .text-red-500 {
-  color: #ef4444;
+  color: var(--primary);
   margin-bottom: 1rem;
 }
 
@@ -113,44 +147,12 @@ button:hover:not(:disabled) {
   margin-top: 40px;
 }
 
-button {
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  border: none;
-  background-color: #4a90e2;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: #357ab8;
-}
-
-button, .flashcard {
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  padding: 5px 5px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover, .flashcard:hover {
-  border-color: var(--primary);
-  box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
-}
-
-button:disabled {
-  background-color: #e2e8f0;
-  cursor: not-allowed;
-}
-
 .flashcard {
   width: 300px;
   height: 200px;
   perspective: 1000px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .flashcard-inner {
@@ -179,7 +181,7 @@ button:disabled {
   border-radius: 12px;
   background-color: var(--card-bg);
   color: var(--text);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--card-shadow);
   text-align: center;
   padding: 16px;
   box-sizing: border-box;
@@ -187,4 +189,50 @@ button:disabled {
 
 .flashcard-back {
   transform: rotateY(180deg);
+}
+
+.upload-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.upload-btn {
+  background-image: var(--upload-color);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-btn:hover {
+  background-image: var(--upload-hover);
+  box-shadow: 0 0 10px #ff70a6, 0 0 20px #ff70a6;
+}
+
+.upload-btn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.generate-btn {
+  background-image: var(--generate-color);
+  border-radius: 6px;
+}
+
+.generate-btn:hover {
+  background-image: var(--generate-hover);
+}
+
+.arrows {
+  background-image: var(--arrow-color);
+  border-radius: 6px;
+}
+
+.arrows:hover {
+  background-image: var(--arrow-hover);
 }

@@ -33,14 +33,14 @@ function FlashcardDeck({ cards }) {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
-      <button onClick={prevCard}>←</button>
+      <button class='arrows' onClick={prevCard}>←</button>
       <Flashcard
         question={currentCard.question || currentCard.front || "Missing question"}
         answer={currentCard.answer || currentCard.back || "Missing answer"}
         flipped={flipped}
         onFlip={() => setFlipped(!flipped)}
       />
-      <button onClick={nextCard}>→</button>
+      <button class='arrows' onClick={nextCard}>→</button>
     </div>
   );
 }
