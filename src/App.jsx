@@ -5,9 +5,9 @@ import FlashcardDeck from './components/FlashcardDeck';
 const API_URL = "https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke";
 
 function App() {
-  const [input, setInput] = useState('');
-  const [studyGuide, setStudyGuide] = useState('');
-  const [flashcards, setFlashcards] = useState([]);
+  const [studyData, setStudyData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
     try {
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>AI Study Guide Generator</h1>
+      <h1 className="text-2xl font-bold mb-4">AI Study Guide Generator</h1>
 
       <textarea
         placeholder="Paste your notes here..."
@@ -53,6 +53,7 @@ function App() {
           <pre style={{ whiteSpace: 'pre-wrap' }}>{studyGuide}</pre>
         </div>
       )}
+    </div>
     </div>
   );
 }
