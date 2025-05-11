@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import FlashcardDeck from './components/FlashcardDeck.jsx';
 import TxtFileUploader from './components/TxtFileUploader.jsx';
 
@@ -11,6 +11,30 @@ function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState("light");
+
+  const studyGuideRef = useRef(null);
+
+  const handleCopy = () => {
+    if (studyGuideRef.current) {
+      const text = studyGuideRef.current.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Study guide copied to clipboard!");
+      }).catch(err => {
+        console.error("Copy failed", err);
+      });
+    }
+  };
+
+
+  const renderStudyGuide = (text) => {
+    return text.split('\n').map((line, idx) => {
+      if (line.startsWith('# ')) return <h1 key={idx}>{line.slice(2)}</h1>;
+      if (line.startsWith('## ')) return <h2 key={idx}>{line.slice(3)}</h2>;
+      if (line.startsWith('• ')) return <li key={idx}>{line.slice(2)}</li>;
+      if (line.trim() === '') return <br key={idx} />;
+      return <p key={idx}>{line}</p>;
+    });
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -73,12 +97,15 @@ function App() {
         <FlashcardDeck cards={flashcards} />
       </div>
 
-      {studyGuide && (
-        <div className="study-guide">
-          <h2>AI-Generated Study Guide:</h2>
-          {(studyGuide)}
+        {studyGuide && (
+        <div className="study-guide" ref={studyGuideRef}>
+          <button className="generate-btn copy-btn" style={{padding:'5px 5px', background:'white'}} onClick={handleCopy}>
+            <img src='cpy.png' width='20px' height='auto'/>
+          </button>
+          {renderStudyGuide(studyGuide)}
         </div>
-      )}
+        )}
+
     </div>
   );
 }

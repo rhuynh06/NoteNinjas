@@ -236,3 +236,91 @@ button:disabled {
 .arrows:hover {
   background-image: var(--arrow-hover);
 }
+
+.study-guide h1,
+.study-guide h2,
+.study-guide h3 {
+  color: var(--text);
+  margin: 1rem 0 0.5rem;
+  font-weight: bold;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.study-guide h1 {
+  font-size: 1.75rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.25rem;
+}
+
+.study-guide h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.2rem;
+}
+
+.study-guide h3 {
+  font-size: 1.25rem;
+}
+
+.study-guide ul {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.study-guide li {
+  margin: 0.25rem 0;
+  line-height: 1.5;
+  list-style-type: disc;
+}
+
+.study-guide p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.study-guide a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.study-guide a:hover {
+  text-decoration: none;
+}
+
+.study-guide code {
+  background: var(--highlight);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.study-guide pre {
+  background-color: var(--highlight);
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: monospace;
+}
+
+.study-guide blockquote {
+  border-left: 4px solid var(--accent);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  color: var(--text);
+  font-style: italic;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.copy-btn {
+  position: relative;
+  left: 95%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--card-shadow);
+  transition: transform 0.2s ease;
+}
