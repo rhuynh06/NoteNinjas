@@ -4,9 +4,16 @@ import botocore
 from IPython.display import display, Markdown
 import time
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()  # Load from .env file
+
+os.environ['AWS_ACCESS_KEY_ID'] = os.getenv('AWS_ACCESS_KEY_ID')
+os.environ['AWS_SECRET_ACCESS_KEY'] = os.getenv('AWS_SECRET_ACCESS_KEY')
+os.environ['AWS_DEFAULT_REGION'] = os.getenv('AWS_DEFAULT_REGION')
 
 # Initialize Bedrock client
-
 session = boto3.session.Session()
 
 region = 'us-west-2'
@@ -31,7 +38,7 @@ def display_response(response, model_name=None):
     print("\n" + "-"*80 + "\n")
 
 # Specify the path to your text file
-file_path = "src/notes.txt"
+file_path = "notes.txt"
 
 # Open and read the file
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -40,15 +47,9 @@ with open(file_path, 'r', encoding='utf-8') as file:
 
 text_to_summarize = file_contents
 
-# response = bedrock.invoke_model(**kwargs)
-
-# body = json.loads(response['body'].read())
-
-# print(body)
-
 # Create prompt for summarization
 prompt = f"""You are an AI assistant that helps generate study guides. Given the following notes, respond with relevant terms and their definitions, as well as questions and answers.
-Do not add any information that is not mentioned in the text below.
+Do not add any information that is not mentioned in the text below. Return in python dictionary format.
 <text>
 {text_to_summarize}
 </text>
@@ -97,10 +98,6 @@ try:
         contentType="application/json"
 
     )
-    # modelId=MODELS["Claude 3.7 Sonnet"],
-    #     body=claude_body,
-    #     accept="application/json",
-    #     contentType="application/json"
     response_body = json.loads(response.get('body').read())
     
     # Extract and display the response text

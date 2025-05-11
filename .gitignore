@@ -7,7 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Environment variables
+.env
+.env.*
+
+# Dependency directories
 node_modules
+
+# Build outputs
 dist
 dist-ssr
 *.local
