@@ -73,8 +73,8 @@ function App() {
         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           style={{background: 'transparent', border: 'none', cursor: 'pointer',
             padding: '0', display: 'flex', alignItems: 'center',}}>
-          {theme === "light" ? (<img src="dark.png" width="50" height="auto"/>)
-          : (<img src="light.png" width="50" height="auto"/>)}
+          {theme === "light" ? (<img src="src/assets/dark.png" width="50" height="auto"/>)
+          : (<img src="src/assets/light.png" width="50" height="auto"/>)}
         </button>
       </div>
 
@@ -100,7 +100,7 @@ function App() {
         {studyGuide && (
         <div className="study-guide" ref={studyGuideRef}>
           <button className="generate-btn copy-btn" style={{padding:'5px 5px', background:'white'}} onClick={handleCopy}>
-            <img src='cpy.png' width='20px' height='auto'/>
+            <img src='src/assets/cpy.png' width='20px' height='auto'/>
           </button>
           {renderStudyGuide(studyGuide)}
         </div>
