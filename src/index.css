@@ -317,10 +317,7 @@ button:disabled {
   position: relative;
   left: 95%;
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 50%;
   padding: 6px;
   cursor: pointer;
-  box-shadow: 0 2px 5px var(--card-shadow);
   transition: transform 0.2s ease;
 }

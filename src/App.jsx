@@ -102,8 +102,8 @@ function App() {
 
         {studyGuide && (
         <div className="study-guide" ref={studyGuideRef}>
-          <button className="generate-btn copy-btn" style={{padding:'5px 5px', background:'white'}} onClick={handleCopy}>
-            <img src={cpy} width='20px' height='auto'/>
+          <button className="generate-btn copy-btn" style={{padding:'5px', background:'white'}} onClick={handleCopy}>
+            <img style={{border:'none'}} src={cpy} width='25px' height='auto'/>
           </button>
           {renderStudyGuide(studyGuide)}
         </div>
