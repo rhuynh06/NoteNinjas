@@ -2,17 +2,19 @@
 
 An AI-powered tool that transforms your messy notes into structured study guides — complete with key terms, definitions, and quiz questions. Built to save students time and help them study smarter.
 
-💡 Built at UC Irvine's AWS CloudHacks 2025
+💡Built at UC Irvine's AWS CloudHacks 2025
+
 ---
 
 ## 🚀 Features
 
-- Upload or paste notes to instantly generate:
-  - 📚 Key terms and definitions
-  - ❓ Quiz-style questions and answers
-- Easy-to-use React frontend
-- Fast, serverless Python backend via AWS Lambda
-- AI-powered processing using AWS Bedrock
+-  📝 **Paste or upload notes** — Supports both direct text input and `.txt` file uploads
+- 🧠 **AI-powered parsing** — Extracts key terms, definitions, and important concepts using AWS Bedrock
+- 📚 **Study guide generation** — Automatically creates organized, readable content from raw notes
+- ❓ **Quiz question builder** — Generates flashcard-style Q&A to reinforce learning
+- ⚡ **Fast & serverless backend** — Built with AWS Lambda for quick and scalable processing
+- 🌐 **Modern frontend UI** — Responsive React interface, deployed with AWS Amplify
+- 🔐 **Secure architecture** — Uses IAM roles to protect access across services
 
 ---
 
@@ -43,20 +45,20 @@ Install rpm (React Project Manager):
 ### 3. Start the development server
 - rpm run dev
 
-🧩 AWS Services Used
+## 🧩 AWS Services Used
 AWS Lambda – runs the Python backend
 AWS Bedrock – generates study content using foundational models
 API Gateway – bridges frontend to backend
 Amplify – hosts and deploys the frontend
 IAM – secures resource access
 
-📈 What's Next
+## 📈 What's Next
 📄 Support for PDF and DOCX uploads
 📤 Export to Anki, Quizlet, or CSV
 🔐 User login and saved sessions
 🧠 Smarter AI with subject-specific tuning
 
-🤝 Team
+## 🤝 Team
 Built by Ryan Huynh, Kelvin Truong, and Ethan Vo
 
 
