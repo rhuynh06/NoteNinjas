@@ -2,7 +2,6 @@ import json
 import boto3
 import botocore
 from IPython.display import display, Markdown
-import time
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -14,6 +13,7 @@ os.environ['AWS_SECRET_ACCESS_KEY'] = os.getenv('AWS_SECRET_ACCESS_KEY')
 os.environ['AWS_DEFAULT_REGION'] = os.getenv('AWS_DEFAULT_REGION')
 
 # Initialize Bedrock client
+
 session = boto3.session.Session()
 
 region = 'us-west-2'
@@ -38,18 +38,17 @@ def display_response(response, model_name=None):
     print("\n" + "-"*80 + "\n")
 
 # Specify the path to your text file
-file_path = "notes.txt"
+file_path = Path('notes.txt')
 
 # Open and read the file
 with open(file_path, 'r', encoding='utf-8') as file:
     file_contents = file.read()
 
-
 text_to_summarize = file_contents
 
 # Create prompt for summarization
 prompt = f"""You are an AI assistant that helps generate study guides. Given the following notes, respond with relevant terms and their definitions, as well as questions and answers.
-Do not add any information that is not mentioned in the text below. Return in python dictionary format.
+Do not add any information that is not mentioned in the text below. Return json formatted.
 <text>
 {text_to_summarize}
 </text>
@@ -98,6 +97,7 @@ try:
         contentType="application/json"
 
     )
+     
     response_body = json.loads(response.get('body').read())
     
     # Extract and display the response text
