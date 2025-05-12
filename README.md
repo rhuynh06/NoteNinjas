@@ -26,7 +26,7 @@
 - **AI Model**: Claude 3.7 Sonnet via AWS Bedrock
 - **Routing/API**: AWS API Gateway
 - **Security**: AWS IAM
-- **Other tools**: dotenv, IPython, rpm (React Project Manager)
+- **Other tools**: dotenv, IPython, rpm (React Project Manager), Amazon Polly
 
 ---
 
