@@ -12,6 +12,7 @@
 - 🧠 **AI-powered parsing** — Extracts key terms, definitions, and important concepts using **Claude 3.7 Sonnet from AWS Bedrock**
 - 📚 **Study guide generation** — Automatically creates organized, readable content from raw notes
 - ❓ **Quiz question builder** — Generates flashcard-style Q&A to reinforce learning
+- 🔊 **Auditory learning** - Text-to-speech support using Amazon Polly
 - ⚡ **Fast & serverless backend** — Built with **AWS Lambda** for quick and scalable processing
 - 🌐 **Modern frontend UI** — Responsive **React** interface, deployed with **AWS Amplify**
 - 🔐 **Secure architecture** — Uses **IAM** roles to protect access across services
@@ -56,6 +57,7 @@ Make sure your .env file is correctly set up with API Gateway endpoint and any n
 - Amplify – hosts and deploys the frontend
 - IAM – secures resource access
 - CloudWatch – Monitors logs and errors from Lambda for debugging and observability
+- Amazon Polly – Converts AI-generated text into speech for auditory learners
 
 ---
 
