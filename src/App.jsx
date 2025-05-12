@@ -6,6 +6,9 @@ import light from './assets/light.png';
 import dark from './assets/dark.png';
 import logo_light from './assets/logo_light.png';
 import logo_dark from './assets/logo_dark.png';
+import rewind from './assets/rewind.png';
+import forward from './assets/forward.png';
+import play from './assets/play.png';
 
 const API_URL = 'https://q7jzcort01.execute-api.us-west-2.amazonaws.com/invoke';
 
@@ -153,54 +156,40 @@ function App() {
 
       {studyGuide && (
         <div className="study-guide" ref={studyGuideRef}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <button className="generate-btn copy-btn" style={{ padding: '5px' }} onClick={handleCopy}>
+          <div className="study-guide-top">
+
+            <button className="sound-btn" style={{ padding: '5px 10px' }} onClick={handleSpeak}>Read Aloud</button>
+
+            <audio ref={audioRef} style={{ display: 'none' }} />
+
+            <button className="sound-btn"
+            onClick={() => audioRef.current && (audioRef.current.currentTime -= 10)}>
+              <img style={{ border: 'none' }} src={rewind}/>
+            </button>
+
+            <button className="sound-btn"
+              onClick={() => {
+                if (!audioRef.current) return;
+                if (audioRef.current.paused) {
+                  audioRef.current.play();
+                } else {
+                  audioRef.current.pause();
+                }
+              }}>
+              <img style={{ border: 'none' }} src={play}/>
+            </button>
+
+            <button className="sound-btn"
+              onClick={() => audioRef.current && (audioRef.current.currentTime += 10)}>
+              <img style={{ border: 'none' }} src={forward}/>
+            </button>
+
+
+            <button className="copy-btn" style={{ padding: '5px'}} onClick={handleCopy}>
               <img style={{ border: 'none' }} src={cpy} width='25px' height='auto' />
             </button>
-
-            <button className="generate-btn" style={{ padding: '5px 10px' }} onClick={handleSpeak}>
-              🔊 Read Aloud
-            </button>
           </div>
-
-          {/* Hidden audio element */}
-          <audio ref={audioRef} style={{ display: 'none' }} />
-
-          {/* Custom icon-only audio controls */}
-          <div style={{ display: 'flex', gap: '6px', marginTop: '10px' }}>
-            <button
-              className="generate-btn"
-              style={{ padding: '4px 8px', fontSize: '1.2rem' }}
-              aria-label="Back 10 seconds"
-              onClick={() => audioRef.current && (audioRef.current.currentTime -= 10)}
-            >
-              ⏪
-            </button>
-            <button
-                className="generate-btn"
-                style={{ padding: '4px 8px', fontSize: '1.2rem' }}
-                aria-label="Toggle Play/Pause"
-                onClick={() => {
-                  if (!audioRef.current) return;
-                  if (audioRef.current.paused) {
-                    audioRef.current.play();
-                  } else {
-                    audioRef.current.pause();
-                  }
-                }}
-              >
-                ⏯️
-              </button>
-            <button
-              className="generate-btn"
-              style={{ padding: '4px 8px', fontSize: '1.2rem' }}
-              aria-label="Forward 10 seconds"
-              onClick={() => audioRef.current && (audioRef.current.currentTime += 10)}
-            >
-              ⏩
-            </button>
-          </div>
-
+            
 
           {renderStudyGuide(studyGuide)}
         </div>

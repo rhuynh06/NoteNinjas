@@ -14,7 +14,7 @@
 
   --button-color: var(--primary);
   --button-hover: var(--primary-hover);
---generate-color: linear-gradient(45deg, #ff6b6b, #ff8e72);
+  --generate-color: linear-gradient(45deg, #ff6b6b, #ff8e72);
   --generate-hover: linear-gradient(45deg, #ff5252, #ff6b57);
 
   --upload-color: linear-gradient(45deg, #4facfe, #00f2fe);
@@ -331,10 +331,42 @@ button:disabled {
 
 .copy-btn {
   position: relative;
-  left: 95%;
-  background: whitesmoke;
-  border-radius: 50%;
+  left: 65%;
+  background: var(--arrow-color);
   padding: 6px;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.sound-btn {
+  color: var(--text);
+  padding: 5px 10px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--arrow-color);
+}
+
+.sound-btn:hover {
+  background: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.sound-btn img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(0.3);
+}
+
+[data-theme="dark"] .sound-btn img {
+  filter: brightness(0) invert(0.9);
+}
+
+div.study-guide-top {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 2px;
 }
