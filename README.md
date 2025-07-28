@@ -1,4 +1,4 @@
-# NoteNinjas
+# [NoteNinjas](https://devpost.com/software/ai-study-guide-generator-0hrlm1)
 
 **NoteNinjas** is your AI-powered study sidekick that slices through your chaotic notes and transforms them into sharp, focused study guides. Using **Claude 3.7 Sonnet** from AWS Bedrock, it extracts key terms, definitions, and generates flashcards to help you master your material quickly.
 
